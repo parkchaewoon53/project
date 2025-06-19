@@ -60,21 +60,6 @@ public class UserServiceImpl implements UserService{
 			
 		}
 
-	@Override
-	public UserDto getUserByEmail(String email) {
-		return userMapper.findByEmail(email);
-	}
-
-	@Override
-	public void saveUser(CreateUserDto createUserDto) {
-		UserDto user = getUserByEmail(createUserDto.getEmail());
-		if(user != null) {
-			throw new AlreadyExistedUserException(errorMessagePropertySource.getAlreadyExistedUser());
-		}
-		createUserDto.setPassword(passwordEncoder.encode(createUserDto.getPassword()));
-		userMapper.createUser(createUserDto);
-		userMapper.saveUserAuthority(createUserDto);
-	}
 
 //	@Override
 //	public User findByEmail(String email) {

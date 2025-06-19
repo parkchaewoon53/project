@@ -10,7 +10,4 @@ public interface UserService {
 	UserDto getUser(String id);
 	void createUser(CreateUserDto createUserDto);
 	String createToken(SignInDto signInDto);
-	
-	UserDto getUserByEmail(String email);
-	void saveUser(CreateUserDto createUserDto);
 }

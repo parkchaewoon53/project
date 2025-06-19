@@ -15,7 +15,4 @@ public interface UserMapper {
 	 List<String> findAuthoritiesByUserId(@Param("u_id") String u_id);
 	 int saveUser(CreateUserDto createUserDto);
 	 void saveUserAuthority(CreateUserDto createUserDto);
-	 int saveAdminAuthority(CreateUserDto createUserDto);
-	 UserDto findByEmail(@Param("email") String email);
-	 void createUser(CreateUserDto createUserDto);
 }
