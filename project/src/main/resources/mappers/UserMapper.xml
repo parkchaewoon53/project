@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.membership.repository.UserMapper">
+
+    <resultMap id="UserResultMap" type="com.example.membership.dto.UserDto">
+        <id property="id" column="u_id"/>
+        <result property="password" column="password"/>
+        <result property="totalMileage" column="total_mileage"/>
+        <result property="email" column="email"/>
+        <collection property="authorities" ofType="string" column="u_id" select="findAuthoritiesByUserId"/>
+    </resultMap>
+
+    <select id="findUserById" resultMap="UserResultMap" parameterType="String">
+        SELECT u.u_id,
+               u.password,
+               u.total_mileage,
+               u.email
+        FROM users u
+        WHERE u.u_id = #{id, jdbcType=VARCHAR}
+    </select>
+
+    <select id="findAuthoritiesByUserId" resultType="string">
+        SELECT role
+        FROM role
+        WHERE u_id = #{u_id}
+    </select>
+    
+    <select id="findByEmail" resultMap="UserResultMap" parameterType="String">
+        SELECT u.u_id,
+               u.password,
+               u.total_mileage,
+               u.email
+        FROM users u
+        WHERE u.u_id = #{id, jdbcType=VARCHAR}
+    </select>
+    
+    <insert id="saveUser">
+        INSERT INTO users (u_id, email, password)
+        SELECT #{id}, #{email}, #{password}
+        FROM dual
+        WHERE EXISTS (
+            SELECT 1 FROM AUTHENTICATION_FIRST 
+            WHERE email = #{email}
+              AND AUTHENTICATION_ACCEPT = 'T'
+        )
+    </insert>
+
+    <insert id="saveUserAuthority">
+        INSERT INTO role (u_id)
+        VALUES (#{id})
+    </insert>
+
+    <insert id="saveAdminAuthority">
+        INSERT INTO role (u_id, role)
+        VALUES (#{id}, 'ROLE_ADMIN')
+    </insert>
+    
+    <insert id="createUser">
+        INSERT INTO users (u_id, password, email)
+        VALUES (#{id}, #{password}, #{email})
+    </insert>
+    
+</mapper>
