@@ -1,7 +1,5 @@
 package com.example.project.email.entity;
 
-import org.springframework.data.annotation.Id;
-
 import jakarta.persistence.*;
 import lombok.Data;
 
