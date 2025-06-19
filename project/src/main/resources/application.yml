@@ -19,3 +19,24 @@ mybatis:
     jdbc-type-for-null: NULL
   type:
     aliases-package: com.example.project
+
+jwt:
+  # The JWT JWA Specification (RFC 7518, Section 3.2) states that keys used with HMAC-SHA algorithms MUST have a size >= 256 bits
+  secret: 6364b0d2de554d3e942b1b8b048345251ce116d2a7264276973bb342f0e55def
+  iss: nextit.or.kr
+  sub: myapp-jwt
+  # 1000 * 60(1분) * 60(1시간) * 24(시간) * 7 = 일주일
+  expiration-milliseconds: 604800000
+cookie:
+  jwt:
+   name: jwt_cookie
+   http-only: false
+   secure: false
+   path: /
+   maxAge: 604800 # maxAge는 초 단위
+kakao:
+  rest:
+   api:
+    key: 1364798dc5ed2d92b8449b3afc8c6f10
+  redirect:
+   uri: http://localhost:5173/login/auth

@@ -3,9 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.project.repository.ObjectMappers">
+<mapper namespace="com.example.project.product.repository.ObjectMappers">
 	<select id="findAllObjects"
-		resultType="com.example.project.dto.FirstGreenDto">
+		resultType="com.example.project.product.dto.FirstGreenDto">
 		SELECT
 		p.product_id,
 		p.name,
@@ -24,7 +24,7 @@
 	</select>
 
 	<select id="findAllEnergy"
-		resultType="com.example.project.dto.FirstEnergyDto">
+		resultType="com.example.project.product.dto.FirstEnergyDto">
 		SELECT
 		p.product_id,
 		p.name,
@@ -47,7 +47,7 @@
 
 
 	<select id="findId"
-		resultType="com.example.project.dto.GreenObjectDto">
+		resultType="com.example.project.product.dto.GreenObjectDto">
 		SELECT *
 		FROM (
 		SELECT
