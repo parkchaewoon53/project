@@ -27,16 +27,7 @@
         FROM role
         WHERE u_id = #{u_id}
     </select>
-    
-    <select id="findByEmail" resultMap="UserResultMap" parameterType="String">
-        SELECT u.u_id,
-               u.password,
-               u.total_mileage,
-               u.email
-        FROM users u
-        WHERE u.u_id = #{id, jdbcType=VARCHAR}
-    </select>
-    
+        
     <insert id="saveUser">
         INSERT INTO users (u_id, email, password)
         SELECT #{id}, #{email}, #{password}
@@ -52,15 +43,5 @@
         INSERT INTO role (u_id)
         VALUES (#{id})
     </insert>
-
-    <insert id="saveAdminAuthority">
-        INSERT INTO role (u_id, role)
-        VALUES (#{id}, 'ROLE_ADMIN')
-    </insert>
-    
-    <insert id="createUser">
-        INSERT INTO users (u_id, password, email)
-        VALUES (#{id}, #{password}, #{email})
-    </insert>
-    
+        
 </mapper>
