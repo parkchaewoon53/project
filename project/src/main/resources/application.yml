@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: project
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@nextit.or.kr:21521:xe
+    username: TEAM202412_01
+    password: oracle21c
+  h2:
+    enabled: false
+  web:
+    resources:
+      static-locations: file:///C:/녹색제품 이미지/
+
+mybatis:
+  mapper-locations: classpath:mappers/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    jdbc-type-for-null: NULL
+  type:
+    aliases-package: com.example.project
