@@ -49,6 +49,7 @@ public class SecurityFilterConfiguration {
                 .requestMatchers("/api/green-object-list").permitAll()
                 .requestMatchers("/api/FirstEnergy").permitAll()
                 .requestMatchers("/api/product/**").permitAll()
+                .requestMatchers("/*.jpg").permitAll()
                 .anyRequest().authenticated();
         });
 
