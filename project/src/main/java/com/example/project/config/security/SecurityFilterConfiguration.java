@@ -46,6 +46,9 @@ public class SecurityFilterConfiguration {
                 .requestMatchers("/api/user/users/**").hasRole("USER")
                 .requestMatchers("/api/user/admin/**").hasRole("ADMIN")
                 .requestMatchers("/api/user/check-userId").permitAll()  // 추가: 아이디 체크 API 공개
+                .requestMatchers("/api/green-object-list").permitAll()
+                .requestMatchers("/api/FirstEnergy").permitAll()
+                .requestMatchers("/api/product/**").permitAll()
                 .anyRequest().authenticated();
         });
 
