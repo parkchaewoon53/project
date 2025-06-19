@@ -1,12 +1,12 @@
-package com.example.project.repository;
+package com.example.project.product.repository;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.project.dto.FirstEnergyDto;
-import com.example.project.dto.FirstGreenDto;
-import com.example.project.dto.GreenObjectDto;
+import com.example.project.product.dto.FirstEnergyDto;
+import com.example.project.product.dto.FirstGreenDto;
+import com.example.project.product.dto.GreenObjectDto;
 
 @Mapper
 public interface ObjectMappers {

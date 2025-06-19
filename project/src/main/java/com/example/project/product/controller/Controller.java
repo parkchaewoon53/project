@@ -1,4 +1,4 @@
-package com.example.project.controller;
+package com.example.project.product.controller;
 
 import java.util.List;
 
@@ -7,13 +7,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.project.dto.FirstEnergyDto;
-import com.example.project.dto.FirstGreenDto;
-import com.example.project.dto.GreenObjectDto;
-import com.example.project.service.ObjectService;
+import com.example.project.product.dto.FirstEnergyDto;
+import com.example.project.product.dto.FirstGreenDto;
+import com.example.project.product.dto.GreenObjectDto;
+import com.example.project.product.service.ObjectService;
 
 import lombok.RequiredArgsConstructor;
 
