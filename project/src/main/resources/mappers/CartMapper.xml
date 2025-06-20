@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.example.project.cart.repository.CartMappers">
+	<insert id="createCart">
+		INSERT INTO cart (u_id, p_id, quantity)
+		VALUES (
+		#{uId, jdbcType=VARCHAR},
+		#{pId, jdbcType=VARCHAR},
+		#{quantity,
+		jdbcType=INTEGER}
+		)
+	</insert>
+
+	<select id="findCart"
+		resultType="com.example.project.cart.dto.CartDto">
+		SELECT
+		p.product_id,
+		p.name,
+		p.prices,
+		p.mileage,
+		MIN(pi.p_image) AS images,
+		c.quantity
+		FROM CART c
+		INNER JOIN PRODUCT p ON c.P_ID = p.PRODUCT_ID
+		LEFT OUTER JOIN PRODUCT_IMAGE pi ON p.PRODUCT_ID = pi.P_ID
+		WHERE c.U_ID = #{uId}
+		GROUP BY
+		p.product_id,
+		p.name,
+		p.prices,
+		p.mileage,
+		c.quantity
+	</select>
+</mapper>

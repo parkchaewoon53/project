@@ -45,11 +45,12 @@ public class SecurityFilterConfiguration {
                 .requestMatchers("/mail/**").permitAll()
                 .requestMatchers("/api/user/users/**").hasRole("USER")
                 .requestMatchers("/api/user/admin/**").hasRole("ADMIN")
-                .requestMatchers("/api/user/check-userId").permitAll()  // 추가: 아이디 체크 API 공개
+                .requestMatchers("/api/user/check-userId").permitAll()  
                 .requestMatchers("/api/green-object-list").permitAll()
                 .requestMatchers("/api/FirstEnergy").permitAll()
                 .requestMatchers("/api/product/**").permitAll()
                 .requestMatchers("/*.jpg").permitAll()
+                .requestMatchers("/api/cart").hasRole("USER")
                 .anyRequest().authenticated();
         });
 
