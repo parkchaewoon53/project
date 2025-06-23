@@ -6,6 +6,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,39 +31,50 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 	private final UserService userService;
 	private final CookieHelper cookieHelper;
-	
+
 	@GetMapping("/check-userId")
 	public ResponseEntity<Void> checkUserId(@RequestParam("id") String id) {
 		System.out.println(id);
 		UserDto user = userService.getUser(id);
-		if(user != null) {
-			return ResponseEntity.status(409).build(); 
+		if (user != null) {
+			return ResponseEntity.status(409).build();
 		}
 		return ResponseEntity.ok().build();
 	}
-	
+
 	@PostMapping("/sign-up")
 	public ResponseEntity<Void> signUp(@RequestBody CreateUserDto createUserDto) {
 		userService.createUser(createUserDto);
-		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/check-userId").buildAndExpand(createUserDto.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/check-userId")
+				.buildAndExpand(createUserDto.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
-	
+
 	@PostMapping("/sign-in")
-    public ResponseEntity<TokenDto> signIn(@RequestBody SignInDto signInDto) {
-        String token = userService.createToken(signInDto);
+	public ResponseEntity<TokenDto> signIn(@RequestBody SignInDto signInDto) {
+		String token = userService.createToken(signInDto);
 
-        // 쿠키에 토큰 추가
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Set-Cookie", cookieHelper.makeJwtCookie(token));
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("Set-Cookie", cookieHelper.makeJwtCookie(token));
 
-        return new ResponseEntity<>(TokenDto.builder().token(token).build(), httpHeaders, HttpStatus.OK);
-    }
-	
+		return new ResponseEntity<>(TokenDto.builder().token(token).build(), httpHeaders, HttpStatus.OK);
+	}
+
 	@PostMapping("/sign-out")
 	public ResponseEntity<Void> signOut() {
 		HttpHeaders httpHeaders = new HttpHeaders();
 		cookieHelper.deleteJwtCookie(httpHeaders);
 		return ResponseEntity.ok().headers(httpHeaders).body(null);
+	}
+
+	@PostMapping("/checkPassword")
+	public boolean checkPassword(@RequestBody UserDto userDto) {
+		return userService.checkPassword(userDto);
+	}
+	@PostMapping("/byebye")
+	public ResponseEntity<Void> deleteUser(@RequestBody UserDto userDto) {
+	    String uId = userDto.getId();
+	    userService.deleteUser(uId);
+	    return ResponseEntity.ok().build();
 	}
 }

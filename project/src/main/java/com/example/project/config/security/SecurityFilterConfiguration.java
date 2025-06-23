@@ -1,4 +1,4 @@
-package com.example.project.config.security;
+ package com.example.project.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -51,6 +51,8 @@ public class SecurityFilterConfiguration {
                 .requestMatchers("/api/product/**").permitAll()
                 .requestMatchers("/*.jpg").permitAll()
                 .requestMatchers("/api/cart").hasRole("USER")
+                .requestMatchers("/api/user/checkPassword").permitAll()
+                .requestMatchers("/api/user/byebye").permitAll()
                 .anyRequest().authenticated();
         });
 

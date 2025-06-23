@@ -23,14 +23,12 @@ public class CarController {
 
 	@PostMapping("/cart")
 	public void addToCart(@RequestBody CreateCart createCart) {
-		System.out.println("pId = " + createCart.getPId());
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String userId = ((UserDetails) authentication.getPrincipal()).getUsername(); 
 		createCart.setUId(userId);
 		cartService.createCar(createCart);
 	}
-	@
-	GetMapping("/cart")
+	@GetMapping("/cart")
 	public List<CartDto> getCart() {
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String uId = ((UserDetails) auth.getPrincipal()).getUsername(); 

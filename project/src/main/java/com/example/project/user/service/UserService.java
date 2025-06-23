@@ -11,4 +11,6 @@ public interface UserService {
 	void createUser(CreateUserDto createUserDto);
 	String createToken(SignInDto signInDto);
 	UserDto kakaoLogin(KakaoUserDto kakaoUserDto);
+	boolean checkPassword(UserDto userDto);
+	void deleteUser(String uId);
 }

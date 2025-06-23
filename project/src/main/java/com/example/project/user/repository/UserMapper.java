@@ -20,4 +20,10 @@ public interface UserMapper {
 	 void insertKakaoUser(CreateUserDto createUserDto);
 	 void saveKakaoUser(CreateUserDto createUserDto);
 	 void saveUserKakaoAuthority(CreateUserDto createUserDto);
+	 
+	 String findPasswordById(String uId);
+	 void deleteAddress(@Param("uId") String uId);
+	 void deleteRole(@Param("uId") String uId);
+	 void deleteCart(@Param("uId") String uId);
+	 void deleteUser(@Param("uId") String uId);
 }
