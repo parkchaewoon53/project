@@ -8,4 +8,5 @@ public class AddressDto {
 	private String address;
 	private String detailAddress;
 	private String postAddress;
+	private int no;
 }
