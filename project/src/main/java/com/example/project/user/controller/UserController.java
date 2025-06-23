@@ -82,7 +82,6 @@ public class UserController {
 	@GetMapping("/userById")
 	public ResponseEntity<UserDto> getUser(@RequestParam("id") String id) {
 		UserDto user = userService.getUser(id);
-			return ResponseEntity.ok(user); 
+		return ResponseEntity.ok(user);
 	}
-
 }
