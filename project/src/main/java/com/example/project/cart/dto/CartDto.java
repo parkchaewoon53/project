@@ -10,4 +10,5 @@ public class CartDto {
 	private int prices;
 	private int mileage;
 	private String productId;
+	private int no;
 }

@@ -53,6 +53,8 @@ public class SecurityFilterConfiguration {
                 .requestMatchers("/api/cart").hasRole("USER")
                 .requestMatchers("/api/user/checkPassword").permitAll()
                 .requestMatchers("/api/user/byebye").permitAll()
+                .requestMatchers("/api/user/deleteAddress").permitAll()
+                .requestMatchers("/api/user/address").permitAll()
                 .anyRequest().authenticated();
         });
 

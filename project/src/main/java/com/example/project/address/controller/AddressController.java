@@ -2,6 +2,7 @@ package com.example.project.address.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,7 +30,9 @@ public class AddressController {
 	public void saveAddress(@RequestBody CreateAdDto createAdDto) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String userId = ((UserDetails) authentication.getPrincipal()).getUsername();
-		createAdDto.setUId(userId);
+
+		createAdDto.setUId(userId); 
+
 		service.createAddress(createAdDto);
 	}
 
@@ -39,4 +42,14 @@ public class AddressController {
 		String uId = ((UserDetails) auth.getPrincipal()).getUsername();
 		return service.getAddress(uId);
 	}
+
+	@PostMapping("/deleteAddress")
+	public ResponseEntity<Void> deleteUser(@RequestBody AddressDto dto) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String uId = ((UserDetails) authentication.getPrincipal()).getUsername();
+		int no = dto.getNo();
+		service.deleteAddress(uId, no);
+		return ResponseEntity.ok().build();
+	}
+
 }

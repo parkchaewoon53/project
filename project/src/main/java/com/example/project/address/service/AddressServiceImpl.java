@@ -12,9 +12,9 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class AddressServiceImpl implements AddressSerivce{
+public class AddressServiceImpl implements AddressSerivce {
 	private final AddressMapper mapper;
-	
+
 	@Override
 	public void createAddress(CreateAdDto createAd) {
 		mapper.createAddress(createAd);
@@ -25,4 +25,8 @@ public class AddressServiceImpl implements AddressSerivce{
 		return mapper.findAddress(uId);
 	}
 
+	@Override
+	public void deleteAddress(String uId, int no) {
+		mapper.deleteAddress(uId, no);
+	}
 }

@@ -8,4 +8,5 @@ import com.example.project.address.dto.CreateAdDto;
 public interface AddressSerivce {
 	void createAddress(CreateAdDto createAd);
 	List<AddressDto> getAddress(String uId);
+	void deleteAddress(String uId, int no);
 }

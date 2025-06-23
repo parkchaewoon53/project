@@ -8,12 +8,19 @@
 	<insert id="createAddress">
 		INSERT INTO address (u_id, address, detail_address,
 		post_address)
-		values(#{uId}, #{address}, #{detailAddress}, #{postAddress})
+		values(#{uId}, #{address}, #{detailAddress},
+		#{postAddress})
 	</insert>
 
 	<select id="findAddress"
 		resultType="com.example.project.address.dto.AddressDto">
-		SELECT address, detail_address, post_Address FROM address
+		SELECT address, detail_address, post_Address, no FROM address
 		WHERE u_id = #{uId}
 	</select>
+
+	<delete id="deleteAddress" parameterType="map">
+		DELETE FROM address
+		WHERE u_id = #{uId}
+		AND no = #{no}
+	</delete>
 </mapper>

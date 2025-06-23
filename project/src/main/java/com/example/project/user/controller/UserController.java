@@ -71,10 +71,18 @@ public class UserController {
 	public boolean checkPassword(@RequestBody UserDto userDto) {
 		return userService.checkPassword(userDto);
 	}
+
 	@PostMapping("/byebye")
 	public ResponseEntity<Void> deleteUser(@RequestBody UserDto userDto) {
-	    String uId = userDto.getId();
-	    userService.deleteUser(uId);
-	    return ResponseEntity.ok().build();
+		String uId = userDto.getId();
+		userService.deleteUser(uId);
+		return ResponseEntity.ok().build();
 	}
+
+	@GetMapping("/userById")
+	public ResponseEntity<UserDto> getUser(@RequestParam("id") String id) {
+		UserDto user = userService.getUser(id);
+			return ResponseEntity.ok(user); 
+	}
+
 }
