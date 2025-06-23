@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.example.project.email.repository.AuthenticationCodeMapper">
+	<!-- 이메일로 u_id 찾기 -->
+	<select id="findUserIdByEmail" parameterType="String"
+		resultType="String">
+		SELECT u_id FROM users WHERE email = #{email}
+	</select>
+
+	<!-- 인증코드 저장 -->
+	<insert id="insertAuthenticationCode"
+        parameterType="com.example.project.email.dto.AuthenticationCode">
+    		INSERT INTO AUTHENTICATION_CODE (NO, u_id, AUTHENTICATION_CODE, AUTHENTICATION_ACCEPT)
+    		SELECT
+        		SEQ_AUTHENTICATION_CODE.NEXTVAL,
+        		u_id,
+        		#{code,jdbcType=VARCHAR},
+        		'F'
+    		FROM users
+    		WHERE email = #{email,jdbcType=VARCHAR}
+	</insert>
+
+	<!-- 인증번호가 맞으면 인증 승인 상태 T로 변경 -->
+	<update id="updateAuthenticationAccept" parameterType="map">
+		UPDATE AUTHENTICATION_CODE
+		SET AUTHENTICATION_ACCEPT = 'T'
+		WHERE u_id = #{uId} AND AUTHENTICATION_CODE = #{code}
+	</update>
+
+	<!-- 인증여부 확인 -->
+	<select id="findAuthenticationAccept" parameterType="String"
+		resultType="String">
+		SELECT AUTHENTICATION_ACCEPT FROM AUTHENTICATION_CODE WHERE u_id = #{uId}
+		ORDER BY no DESC FETCH FIRST 1 ROWS ONLY
+	</select>
+</mapper>
+

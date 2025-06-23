@@ -85,6 +85,16 @@
 		INSERT INTO role (u_id)
 		VALUES (#{id})
 	</insert>
+	
+	<update id="updatePw">
+		UPDATE users SET password = #{password}
+		WHERE u_id = #{id, jdbcType=VARCHAR}
+	</update>
+	
+	<update id="updateEmail">
+		UPDATE users SET email = #{email}
+		WHERE u_id = #{id, jdbcType=VARCHAR}
+	</update>
 
 	<delete id="deleteRole" parameterType="string">
 		DELETE FROM role WHERE u_id = #{uId}
