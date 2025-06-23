@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService{
 			Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 			
 			return tokenProvider.createToken(authentication);
-		} catch (Exception ex) {
+		} catch (Exception ex) { 
 			throw new BadCredentialsException(errorMessagePropertySource.getBadCredentials());
 		}
 			
