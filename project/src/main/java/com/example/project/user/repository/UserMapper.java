@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.example.project.user.dto.CreateUserDto;
+import com.example.project.user.dto.UpdateUserDto;
 import com.example.project.user.dto.UserDto;
 
 @Mapper
@@ -26,4 +27,7 @@ public interface UserMapper {
 	 void deleteRole(@Param("uId") String uId);
 	 void deleteCart(@Param("uId") String uId);
 	 void deleteUser(@Param("uId") String uId);
+	 
+	 void updatePw(UpdateUserDto updateUserDto);
+	 void updateEmail(UpdateUserDto updateUserDto);
 }

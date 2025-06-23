@@ -19,6 +19,7 @@ import com.example.project.config.property.ErrorMessagePropertySource;
 import com.example.project.user.dto.CreateUserDto;
 import com.example.project.user.dto.KakaoUserDto;
 import com.example.project.user.dto.SignInDto;
+import com.example.project.user.dto.UpdateUserDto;
 import com.example.project.user.dto.UserDto;
 import com.example.project.user.repository.UserMapper;
 
@@ -156,6 +157,25 @@ public class UserServiceImpl implements UserService {
 		userMapper.deleteCart(uId);
 		userMapper.deleteAddress(uId);
 		userMapper.deleteUser(uId);
+	}
+	
+	@Override
+	public void updateUserPassword(String id, UpdateUserDto updateUserDto) {
+		updateUserDto.setId(id);
+		updateUserDto.setPassword(passwordEncoder.encode(updateUserDto.getPassword()));
+		userMapper.updatePw(updateUserDto);
+	}
+
+	@Override
+	public void updateUser(UpdateUserDto updateUserDto) {
+		if(updateUserDto.getPassword() != null && !updateUserDto.getPassword().isEmpty()) {
+			updateUserDto.setPassword(passwordEncoder.encode(updateUserDto.getPassword()));
+			userMapper.updatePw(updateUserDto);
+		}
+		
+		if(updateUserDto.getEmail() != null && !updateUserDto.getEmail().isEmpty()) {
+			userMapper.updateEmail(updateUserDto);
+		}
 	}
 
 }
